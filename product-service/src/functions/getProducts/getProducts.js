@@ -14,6 +14,10 @@ export const getProductsList = async (event) => {
             body: JSON.stringify({ products })
         };
     } catch (error) {
-        console.log(error);
+        return {
+            statusCode: error.statusCode || 500,
+            headers: defaultHeaders,
+            body: JSON.stringify({ message: error.message })
+        }
     }
 };

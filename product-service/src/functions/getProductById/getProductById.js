@@ -19,6 +19,10 @@ export const getProductById = async (event) => {
             })
         };
     } catch (error) {
-        console.log(error);
+        return {
+            statusCode: error.statusCode || 500,
+            headers: defaultHeaders,
+            body: JSON.stringify({ message: error.message })
+        }
     }
 };
