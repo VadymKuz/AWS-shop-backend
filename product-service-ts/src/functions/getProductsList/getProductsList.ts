@@ -10,8 +10,7 @@ export const getProductsList = async (_event: APIGatewayProxyEvent): Promise<Lam
     let body: any;
 
     try {
-        const client = await dbConection.connect();
-        const data = (await client.query(`
+        const data = (await dbConection.query(`
             select p.id, p.title, p.description, p.price, p.imageUrl, s.count from stock as s
             inner join product as p
             on s.product_id = p.id

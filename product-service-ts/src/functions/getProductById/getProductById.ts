@@ -13,8 +13,7 @@ export const getProductById = async (event: APIGatewayProxyEvent): Promise<Lambd
         const { id } = event.pathParameters;
         console.log('GetProductById', { event, arguments: id })
 
-        const client = await dbConection.connect();
-        await client.query(`select * from product as p where p.id = '${id}' `)
+        await dbConection.query(`select * from product as p where p.id = '${id}' `)
             .then(res => (product = res.rows[0]))
             .catch(() => { throw new HttpError(HttpCode.NOT_FOUND, 'Product not found') })
 
