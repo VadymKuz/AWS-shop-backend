@@ -5,9 +5,11 @@ import { APIGatewayProxyEvent } from 'aws-lambda';
 import { dbConection } from '../../database/database';
 
 
-export const getProductsList = async (_event: APIGatewayProxyEvent): Promise<LambdaResponse> => {
+export const getProductsList = async (event: APIGatewayProxyEvent): Promise<LambdaResponse> => {
     let statusCode: HttpCode;
     let body: any;
+
+    console.log(event);
 
     try {
         const data = (await dbConection.query(`
