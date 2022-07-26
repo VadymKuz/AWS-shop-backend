@@ -7,8 +7,7 @@
         "dev": "sls offline",
         "deploy": "sls deploy",
         "test": "jest",
-        "docs": "serverless openapi generate",
-        "writedata": "psql -h rds-cloudx-database.cnoc6yyebg3q.eu-west-1.rds.amazonaws.com -U VadymKuzovkin -d cloudx_course"
+        "docs": "serverless openapi generate"
     },
     "engines": {
         "node": ">=16.15.0"

@@ -92,7 +92,34 @@ const serverlessConfiguration: AWS = {
                         method: 'post',
                         path: '/products',
                         cors: true,
-                    }
+                        documentation: {
+                            description: 'Create product',
+                            requestModels: {
+                                'application/json': 'CreateProduct'
+                            },
+                            methodResponses: [{
+                                statusCode: '200',
+                                responseModels: {
+                                    'application/json': 'Product'
+                                }
+                            }, {
+                                statusCode: '400',
+                                responseModels: {
+                                    'application/json': 'ServiceError'
+                                }
+                            }, {
+                                statusCode: '404',
+                                responseModels: {
+                                    'application/json': 'ServiceError'
+                                }
+                            }, {
+                                statusCode: '500',
+                                responseModels: {
+                                    'application/json': 'ServiceError'
+                                }
+                            }]
+                        }
+                    } as any
                 }
             ]
         }
@@ -147,7 +174,7 @@ const serverlessConfiguration: AWS = {
                             type: 'number',
                             description: 'Product amount',
                         },
-                        image: {
+                        imageUrl: {
                             type: 'string',
                             description: 'Product imageUrl',
                         }
@@ -178,6 +205,35 @@ const serverlessConfiguration: AWS = {
                             type: 'string',
                             description: 'Error message'
                         }
+                    }
+                }
+            }, {
+                name: 'CreateProduct',
+                description: 'Create product args',
+                contentType: 'application/json',
+                schema: {
+                    type: 'object',
+                    properties: {
+                        title: {
+                            type: 'string',
+                            description: 'Product title'
+                        },
+                        description: {
+                            type: 'string',
+                            description: 'Product description'
+                        },
+                        price: {
+                            type: 'number',
+                            description: 'Product price'
+                        },
+                        imageUrl: {
+                            type: 'string',
+                            description: 'Product image url'
+                        },
+                        amount: {
+                            type: 'number',
+                            description: 'Amount of products'
+                        },
                     }
                 }
             }]

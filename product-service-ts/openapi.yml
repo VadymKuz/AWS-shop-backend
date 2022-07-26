@@ -16,6 +16,9 @@ components:
         price:
           type: number
           description: Product price
+        count:
+          type: number
+          description: Product amount
         imageUrl:
           type: string
           description: Product imageUrl
@@ -32,10 +35,28 @@ components:
         message:
           type: string
           description: Error message
+    CreateProduct:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Product title
+        description:
+          type: string
+          description: Product description
+        price:
+          type: number
+          description: Product price
+        imageUrl:
+          type: string
+          description: Product image url
+        amount:
+          type: number
+          description: Amount of products
 info:
   title: ''
   description: ''
-  version: 65ed9630-e1a9-441f-b98a-7b8c2581f86d
+  version: a15d4b5d-6b5c-48e0-8146-3072d82c51fc
 paths:
   /products:
     get:
@@ -49,6 +70,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProductList'
+        '500':
+          description: Status 500 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
+    post:
+      operationId: createProduct
+      description: Create product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProduct'
+      parameters: []
+      responses:
+        '200':
+          description: Status 200 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Status 400 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
+        '404':
+          description: Status 404 Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceError'
         '500':
           description: Status 500 Response
           content:
