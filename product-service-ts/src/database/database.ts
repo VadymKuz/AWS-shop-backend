@@ -1,9 +1,9 @@
-import { Pool, PoolConfig } from "pg"
+import { Client, ClientConfig } from "pg"
 import dotenv from 'dotenv';
 dotenv.config();
 
 const { PG_HOST, PG_PORT, PG_DATABASE, PG_USERNAME, PG_PASSWORD, } = process.env;
-const poolConfig: PoolConfig = {
+const clientConfig: ClientConfig = {
     host: PG_HOST,
     port: +PG_PORT,
     database: PG_DATABASE,
@@ -15,4 +15,7 @@ const poolConfig: PoolConfig = {
     connectionTimeoutMillis: 5000,
 }
 
-export const dbConection = new Pool(poolConfig);
+const dbClient = new Client(clientConfig);
+dbClient.connect();
+
+export { dbClient };
