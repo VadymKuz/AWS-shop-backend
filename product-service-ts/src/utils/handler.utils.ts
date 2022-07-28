@@ -1,4 +1,5 @@
 import { APIGatewayProxyEvent } from "aws-lambda";
+import { dbConection } from "src/database/database";
 import { CORS_HEADERS, HttpCode } from "./http.utils";
 import logger from './logger.utils'
 
@@ -21,6 +22,7 @@ export const handler = (callback: (event: APIGatewayProxyEvent) => Promise<any>)
             result = { statusCode, message: err.message, };
             logger.error('ERROR', result)
         } finally {
+            dbConection.end();
             return {
                 statusCode,
                 headers: CORS_HEADERS,
