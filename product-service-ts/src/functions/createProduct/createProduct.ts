@@ -24,10 +24,7 @@ export const createProduct = handler(async (event: APIGatewayProxyEvent): Promis
             values: [createdProduct.rows[0].id, amount],
         };
         const createdStock = await dbClient.query(stockQueryConfig)
-            .catch(() => { throw new HttpError(HttpCode.BAD_REQUEST, 'Please provide correct product data') });;
-
-        console.log('ddddddd', createdProduct)
-        console.log('ddddddd', createdStock)
+            .catch(() => { throw new HttpError(HttpCode.BAD_REQUEST, 'Please provide correct product data') });
 
         await dbClient.query('commit');
         return { ...createdProduct.rows[0], amount: createdStock.rows[0].count };
